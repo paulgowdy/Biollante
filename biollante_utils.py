@@ -1,5 +1,6 @@
 import numpy as np
 from itertools import product
+from Bio import SeqIO
 
 def kmers(seq, k, stride):
 
@@ -38,3 +39,15 @@ def seq_to_kmer_vector(seq, k, stride):
     seq_kmer_vector[np.arange(seq_kmer_ids.shape[0]), seq_kmer_ids] = 1.0
 
     return seq_kmer_vector
+
+def read_seqs_from_fasta(fasta_fn):
+
+    records = list(SeqIO.parse(fasta_fn, 'fasta'))
+
+    seqs = []
+
+    for r in records:
+
+        seqs.append(r.seq)
+
+    return seqs
